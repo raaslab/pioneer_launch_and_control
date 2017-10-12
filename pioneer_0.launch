@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<launch>
+	<group ns="pioneer_0">
+	    <node pkg="rosaria" type="RosAria" name="RosAria">
+		<param name="_port" value="/dev/ttyUSB0" />
+		<param name="odom_frame" value="pioneer_0/odom" />
+		<param name="base_link_frame" value="pioneer_0/base_link" />
+	    </node>
+	</group>
+
+ 	<group ns="pioneer_0">
+		<param name="tf_prefix" value="pioneer_0" />
+ 		<node pkg="tf" type="static_transform_publisher" name="global_origin_to_odom" args="1 0.0 0.0 0.0 0.0 0.0 /global_origin /pioneer_0/odom 100" />
+	</group>
+
+<node pkg="pioneer_control" type="pioneer0_vel.py" name="pioneer0_vel.py"/>
+</launch>
